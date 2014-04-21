@@ -1,7 +1,7 @@
 $(function() {
  
     var messages = [];
-    var socket = io.connect('http://localhost:3700');
+    var socket = io.connect('http://pingbox.co:3700'); // edit this line for whatever domain you're using
  
     socket.on('message', function (data) {
         if(data.message) {
@@ -30,11 +30,11 @@ $(function() {
     });
 
     $("#send").click(function() {
-        if($("#name").val() == "") {
+        if($("#name").text() == "") {
             alert("Please type your name!");
         } else {
             var text = $("#field").val();
-            socket.emit('send', { message: text, username: $("#name").val() });
+            socket.emit('send', { message: text, username: $("#name").text() });
             $("#field").val("");
         }
     });

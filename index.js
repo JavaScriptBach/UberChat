@@ -13,11 +13,16 @@ app.get("/", function(req, res){
 });
 app.use(express.static(__dirname + '/public'));
 var io = require('socket.io').listen(app.listen(port));
+var clientCount = 0;
 io.sockets.on('connection', function (socket) {
-    socket.emit('message', { message: 'Welcome to the chat!' });
+	clientCount++;
+	socket.emit('message', { message: 'Welcome to Uber Chat! ' + clientCount + ' currently connected.' });
     socket.on('send', function (data) {
         io.sockets.emit('message', data);
     });
+	socket.on('disconnect', function() {
+		clientCount--;
+	});
 });
 console.log("Listening on port " + port);
 

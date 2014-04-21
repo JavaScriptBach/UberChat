@@ -1,15 +1,20 @@
 doctype html
 html
 	head
-		title= "Real time web chat"
+		title= "Uber Chat"
 		script(src='//code.jquery.com/jquery-1.11.0.min.js')
 		script(src='/socket.io/socket.io.js')
 		script(src='/chat.js')
+		script(src='/facebook.js')
 	body
+		#fb-root
 		#content(style='width: 500px; height: 300px; margin: 0 0 20px 0; padding: 5px; border: solid 1px #999; overflow-y: scroll;')
 		.controls
-			| Name: 
-			input#name(style='width:350px;')
+			.fb-login-button(data-max-rows='1', data-size='large', data-show-faces='false', data-auto-logout-link='false')
 			br
-			input#field(style='width:350px;')
-			input#send(type='button', value='send')
+			| Name: 
+			span#name(style='width:350px;')
+				| Log in with Facebook to use Uber Chat
+			br
+			input#field(style='width:350px;', disabled='disabled')
+			input#send(type='button', value='send', disabled='disabled')
